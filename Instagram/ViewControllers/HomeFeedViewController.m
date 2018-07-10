@@ -7,6 +7,7 @@
 //
 
 #import "HomeFeedViewController.h"
+#import <Parse/Parse.h>
 
 @interface HomeFeedViewController ()
 
@@ -22,6 +23,15 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)didTapLogout:(id)sender {
+    [self logoutUser];
+}
+
+- (void)logoutUser {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {}];
+    [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
 }
 
 /*

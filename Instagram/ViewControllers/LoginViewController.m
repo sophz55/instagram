@@ -57,6 +57,25 @@
     }
 }
 
+- (IBAction)didTapLogin:(id)sender {
+    [self loginUser];
+}
+
+- (void)loginUser {
+    NSString *username = self.usernameField.text;
+    NSString *password = self.passwordField.text;
+    
+    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
+        if (error != nil) {
+            NSLog(@"User log in failed: %@", error.localizedDescription);
+            [self callAlertWithTitle:@"Login Failed!" alertMessage:[NSString stringWithFormat:@"%@",error.localizedDescription]];
+        } else {
+            NSLog(@"User logged in successfully");
+            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+        }
+    }];
+}
+
 - (void)callAlertWithTitle:(NSString *)title alertMessage:(NSString *)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleAlert)];
     
@@ -67,9 +86,6 @@
     [alert addAction:okAction];
     
     [self presentViewController:alert animated:YES completion:^{}];
-}
-
-- (IBAction)didTapLogin:(id)sender {
 }
 
 /*

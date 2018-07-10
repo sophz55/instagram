@@ -9,7 +9,7 @@
 #import "HomeFeedViewController.h"
 #import <Parse/Parse.h>
 
-@interface HomeFeedViewController ()
+@interface HomeFeedViewController () <UITabBarDelegate>
 
 @end
 

@@ -17,6 +17,8 @@
 		F30D058720F41BA7007DE0D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F30D058620F41BA7007DE0D3 /* main.m */; };
 		F30D059120F41BA7007DE0D3 /* InstagramTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F30D059020F41BA7007DE0D3 /* InstagramTests.m */; };
 		F30D059C20F41BA7007DE0D3 /* InstagramUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F30D059B20F41BA7007DE0D3 /* InstagramUITests.m */; };
+		F312C16A20F55B1E00F8D62C /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = F312C16920F55B1E00F8D62C /* Post.m */; };
+		F312C16D20F55D3A00F8D62C /* ComposePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F312C16C20F55D3A00F8D62C /* ComposePostViewController.m */; };
 		F332F9FC20F42917000AC72D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332F9FB20F42917000AC72D /* LoginViewController.m */; };
 		F332F9FF20F42F32000AC72D /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332F9FE20F42F32000AC72D /* HomeFeedViewController.m */; };
 /* End PBXBuildFile section */
@@ -60,6 +62,10 @@
 		F30D059720F41BA7007DE0D3 /* InstagramUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F30D059B20F41BA7007DE0D3 /* InstagramUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstagramUITests.m; sourceTree = "<group>"; };
 		F30D059D20F41BA7007DE0D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F312C16820F55B1E00F8D62C /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		F312C16920F55B1E00F8D62C /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		F312C16B20F55D3A00F8D62C /* ComposePostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposePostViewController.h; sourceTree = "<group>"; };
+		F312C16C20F55D3A00F8D62C /* ComposePostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposePostViewController.m; sourceTree = "<group>"; };
 		F332F9FA20F42917000AC72D /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F332F9FB20F42917000AC72D /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F332F9FD20F42F32000AC72D /* HomeFeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeFeedViewController.h; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 		F30D057620F41BA6007DE0D3 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				F312C16720F55B0D00F8D62C /* Models */,
 				F332F9F920F4286D000AC72D /* ViewControllers */,
 				F30D057720F41BA6007DE0D3 /* AppDelegate.h */,
 				F30D057820F41BA6007DE0D3 /* AppDelegate.m */,
@@ -174,6 +181,15 @@
 			path = InstagramUITests;
 			sourceTree = "<group>";
 		};
+		F312C16720F55B0D00F8D62C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F312C16820F55B1E00F8D62C /* Post.h */,
+				F312C16920F55B1E00F8D62C /* Post.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		F332F9F920F4286D000AC72D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +197,8 @@
 				F332F9FB20F42917000AC72D /* LoginViewController.m */,
 				F332F9FD20F42F32000AC72D /* HomeFeedViewController.h */,
 				F332F9FE20F42F32000AC72D /* HomeFeedViewController.m */,
+				F312C16B20F55D3A00F8D62C /* ComposePostViewController.h */,
+				F312C16C20F55D3A00F8D62C /* ComposePostViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -394,10 +412,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F312C16A20F55B1E00F8D62C /* Post.m in Sources */,
 				F30D058720F41BA7007DE0D3 /* main.m in Sources */,
 				F30D057920F41BA6007DE0D3 /* AppDelegate.m in Sources */,
 				F332F9FC20F42917000AC72D /* LoginViewController.m in Sources */,
 				F332F9FF20F42F32000AC72D /* HomeFeedViewController.m in Sources */,
+				F312C16D20F55D3A00F8D62C /* ComposePostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,7 @@
 		F312C17720F57A9200F8D62C /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F312C17620F57A9200F8D62C /* PostTableViewCell.m */; };
 		F332F9FC20F42917000AC72D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332F9FB20F42917000AC72D /* LoginViewController.m */; };
 		F332F9FF20F42F32000AC72D /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332F9FE20F42F32000AC72D /* HomeFeedViewController.m */; };
+		F3F9FC7C20F6B4C70084B7FB /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F9FC7B20F6B4C70084B7FB /* PostDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,8 @@
 		F332F9FB20F42917000AC72D /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F332F9FD20F42F32000AC72D /* HomeFeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeFeedViewController.h; sourceTree = "<group>"; };
 		F332F9FE20F42F32000AC72D /* HomeFeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeFeedViewController.m; sourceTree = "<group>"; };
+		F3F9FC7A20F6B4C70084B7FB /* PostDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
+		F3F9FC7B20F6B4C70084B7FB /* PostDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
 		F79F14E86770DA3AF6FEF369 /* Pods-InstagramUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramUITests/Pods-InstagramUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F88D2FA06E036B4B6F180A0A /* libPods-InstagramUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InstagramUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -212,6 +215,8 @@
 				F332F9FE20F42F32000AC72D /* HomeFeedViewController.m */,
 				F312C16B20F55D3A00F8D62C /* ComposePostViewController.h */,
 				F312C16C20F55D3A00F8D62C /* ComposePostViewController.m */,
+				F3F9FC7A20F6B4C70084B7FB /* PostDetailViewController.h */,
+				F3F9FC7B20F6B4C70084B7FB /* PostDetailViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Instagram/Pods-Instagram-resources.sh",
+				"${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/en.lproj",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/fr.lproj",
@@ -396,6 +402,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DateTools.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
@@ -436,6 +443,7 @@
 				F30D057920F41BA6007DE0D3 /* AppDelegate.m in Sources */,
 				F312C17720F57A9200F8D62C /* PostTableViewCell.m in Sources */,
 				F332F9FC20F42917000AC72D /* LoginViewController.m in Sources */,
+				F3F9FC7C20F6B4C70084B7FB /* PostDetailViewController.m in Sources */,
 				F332F9FF20F42F32000AC72D /* HomeFeedViewController.m in Sources */,
 				F312C16D20F55D3A00F8D62C /* ComposePostViewController.m in Sources */,
 			);

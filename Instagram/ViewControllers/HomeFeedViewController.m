@@ -9,6 +9,7 @@
 #import "HomeFeedViewController.h"
 #import <Parse/Parse.h>
 #import "PostTableViewCell.h"
+#import "PostDetailViewController.h"
 #import "Post.h"
 
 @interface HomeFeedViewController () <UITabBarDelegate, UITableViewDelegate, UITableViewDataSource>
@@ -44,6 +45,7 @@
 - (void)fetchPosts {
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
     query.limit = 20;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
@@ -86,14 +88,12 @@
     [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    PostTableViewCell *cell = sender;
+    PostDetailViewController *postDetailController = [segue destinationViewController];
+    postDetailController.post = cell.post;
 }
-*/
 
 @end

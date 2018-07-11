@@ -18,11 +18,16 @@
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) PFFile *image;
 @property (nonatomic, strong) NSNumber *likeCount;
+@property (nonatomic) BOOL liked;
 @property (nonatomic, strong) NSNumber *commentCount;
 
 
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 + (PFFile *)getPFFileFromImage: ( UIImage * _Nullable )image;
+
+- (void)toggleLike;
+
+- (NSString *)formatDateString;
 
 @end

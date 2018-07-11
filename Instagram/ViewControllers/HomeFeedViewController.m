@@ -8,8 +8,12 @@
 
 #import "HomeFeedViewController.h"
 #import <Parse/Parse.h>
+#import "PostTableViewCell.h"
+#import "Post.h"
 
-@interface HomeFeedViewController () <UITabBarDelegate>
+@interface HomeFeedViewController () <UITabBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *feedTableView;
+@property (strong, nonatomic) NSArray *posts;
 
 @end
 
@@ -17,7 +21,49 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.feedTableView.dataSource = self;
+    self.feedTableView.delegate = self;
+    
+    self.feedTableView.rowHeight = UITableViewAutomaticDimension;
+    self.feedTableView.estimatedRowHeight = 570;
+    
+    [self fetchPosts];
+    
+    
+}
+
+- (void)presentCamera {
+    
+}
+
+- (void)fetchPosts {
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
+    query.limit = 20;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            self.posts = posts;
+            [self.feedTableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.posts.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
+    
+    Post *post = (Post *)self.posts[indexPath.row];
+    
+    [cell configureCellWithPost:post];
+    
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning {

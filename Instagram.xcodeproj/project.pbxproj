@@ -19,6 +19,7 @@
 		F30D059C20F41BA7007DE0D3 /* InstagramUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F30D059B20F41BA7007DE0D3 /* InstagramUITests.m */; };
 		F312C16A20F55B1E00F8D62C /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = F312C16920F55B1E00F8D62C /* Post.m */; };
 		F312C16D20F55D3A00F8D62C /* ComposePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F312C16C20F55D3A00F8D62C /* ComposePostViewController.m */; };
+		F312C17720F57A9200F8D62C /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F312C17620F57A9200F8D62C /* PostTableViewCell.m */; };
 		F332F9FC20F42917000AC72D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332F9FB20F42917000AC72D /* LoginViewController.m */; };
 		F332F9FF20F42F32000AC72D /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332F9FE20F42F32000AC72D /* HomeFeedViewController.m */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,8 @@
 		F312C16920F55B1E00F8D62C /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		F312C16B20F55D3A00F8D62C /* ComposePostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposePostViewController.h; sourceTree = "<group>"; };
 		F312C16C20F55D3A00F8D62C /* ComposePostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposePostViewController.m; sourceTree = "<group>"; };
+		F312C17520F57A9200F8D62C /* PostTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
+		F312C17620F57A9200F8D62C /* PostTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostTableViewCell.m; sourceTree = "<group>"; };
 		F332F9FA20F42917000AC72D /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F332F9FB20F42917000AC72D /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F332F9FD20F42F32000AC72D /* HomeFeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeFeedViewController.h; sourceTree = "<group>"; };
@@ -150,6 +153,7 @@
 		F30D057620F41BA6007DE0D3 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				F312C17120F57A6D00F8D62C /* Views */,
 				F312C16720F55B0D00F8D62C /* Models */,
 				F332F9F920F4286D000AC72D /* ViewControllers */,
 				F30D057720F41BA6007DE0D3 /* AppDelegate.h */,
@@ -188,6 +192,15 @@
 				F312C16920F55B1E00F8D62C /* Post.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F312C17120F57A6D00F8D62C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F312C17520F57A9200F8D62C /* PostTableViewCell.h */,
+				F312C17620F57A9200F8D62C /* PostTableViewCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F332F9F920F4286D000AC72D /* ViewControllers */ = {
@@ -377,10 +390,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Instagram/Pods-Instagram-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle",
+				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/en.lproj",
+				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/fr.lproj",
+				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/pt-BR.lproj",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt-BR.lproj",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -415,6 +434,7 @@
 				F312C16A20F55B1E00F8D62C /* Post.m in Sources */,
 				F30D058720F41BA7007DE0D3 /* main.m in Sources */,
 				F30D057920F41BA6007DE0D3 /* AppDelegate.m in Sources */,
+				F312C17720F57A9200F8D62C /* PostTableViewCell.m in Sources */,
 				F332F9FC20F42917000AC72D /* LoginViewController.m in Sources */,
 				F332F9FF20F42F32000AC72D /* HomeFeedViewController.m in Sources */,
 				F312C16D20F55D3A00F8D62C /* ComposePostViewController.m in Sources */,

@@ -10,8 +10,10 @@
 #import <Parse/Parse.h>
 #import "Post.h"
 
-@interface ComposePostViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ComposePostViewController ()  <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
+@property (weak, nonatomic) IBOutlet UITextView *postCaptionTextView;
 
 @end
 
@@ -20,6 +22,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self presentCamera];
+}
+
+- (void)presentCamera {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
@@ -46,7 +52,7 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self performSegueWithIdentifier:@"cancelPhotoSegue" sender:nil];
+    [self performSegueWithIdentifier:@"composeToFeedSegue" sender:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,10 +61,53 @@
 }
 
 - (IBAction)didTapShare:(id)sender {
+    
+//    PFObject *post = [[PFObject alloc] initWithClassName:@"Post"];
+//    post[@"postID"] = @"PostID";
+//    post[@"userID"] = @"userID";
+//    PFFile *imageFile = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(self.postImageView.image)];
+//    post[@"image"] = imageFile;
+//    post[@"caption"] = self.postCaptionTextView.text;
+//
+//    [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        if (succeeded) {
+//            // The object has been saved.
+//        }
+//        else {
+//            NSLog(@"save in background %@", error.localizedDescription);
+//        }
+//    }];
+    
+    [Post postUserImage:self.postImageView.image withCaption:self.postCaptionTextView.text withCompletion:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"saved post");
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [self performSegueWithIdentifier:@"composeToFeedSegue" sender:nil];
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+            [self callAlertWithTitle:@"Error saving post" alertMessage:[NSString stringWithFormat:@"%@", error.localizedDescription]];
+        }
+    }];
 }
 
 - (IBAction)didTapCancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier:@"composeToFeedSegue" sender:nil];
 }
+
+- (void)callAlertWithTitle:(NSString *)title alertMessage:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    // create OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // handle response here.
+    }];
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:^{}];
+}
+
 
 /*
 #pragma mark - Navigation

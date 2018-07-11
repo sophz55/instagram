@@ -22,7 +22,7 @@
 }
 
 - (void)configureCellWithPost:(Post *)post {
-//    self.userProfileImageView;
+    self.userProfileImageView.layer.cornerRadius = self.userProfileImageView.frame.size.height/2;;
 //    self.usernameLabel;
 //    self.locationLabel;
     self.postImageView.file = post.image;

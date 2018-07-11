@@ -27,14 +27,12 @@
     
     self.feedTableView.rowHeight = UITableViewAutomaticDimension;
     self.feedTableView.estimatedRowHeight = 570;
-    
-    [self fetchPosts];
-    
-    
 }
 
-- (void)presentCamera {
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     
+    [self fetchPosts];
 }
 
 - (void)fetchPosts {

@@ -21,8 +21,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self presentCamera];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.postImageView.image == NULL){
+        [self presentCamera];
+    }
 }
 
 - (void)presentCamera {
@@ -44,7 +49,10 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    CGSize size;
+    size.width = 500;
+    size.height = 500;
+    UIImage *editedImage = [self resizeImage:info[UIImagePickerControllerEditedImage] withSize:size];
     self.postImageView.image = editedImage;
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -52,7 +60,21 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self performSegueWithIdentifier:@"composeToFeedSegue" sender:nil];
+    self.tabBarController.selectedIndex = 0;
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,28 +83,12 @@
 }
 
 - (IBAction)didTapShare:(id)sender {
-    
-//    PFObject *post = [[PFObject alloc] initWithClassName:@"Post"];
-//    post[@"postID"] = @"PostID";
-//    post[@"userID"] = @"userID";
-//    PFFile *imageFile = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(self.postImageView.image)];
-//    post[@"image"] = imageFile;
-//    post[@"caption"] = self.postCaptionTextView.text;
-//
-//    [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (succeeded) {
-//            // The object has been saved.
-//        }
-//        else {
-//            NSLog(@"save in background %@", error.localizedDescription);
-//        }
-//    }];
-    
     [Post postUserImage:self.postImageView.image withCaption:self.postCaptionTextView.text withCompletion:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"saved post");
             [self dismissViewControllerAnimated:YES completion:nil];
-            [self performSegueWithIdentifier:@"composeToFeedSegue" sender:nil];
+            self.postImageView.image = NULL;
+            self.tabBarController.selectedIndex = 0;
         }
         else {
             NSLog(@"%@", error.localizedDescription);
@@ -93,16 +99,14 @@
 
 - (IBAction)didTapCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self performSegueWithIdentifier:@"composeToFeedSegue" sender:nil];
+    self.tabBarController.selectedIndex = 0;
 }
 
 - (void)callAlertWithTitle:(NSString *)title alertMessage:(NSString *)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleAlert)];
     
     // create OK action
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // handle response here.
-    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:okAction];
     
     [self presentViewController:alert animated:YES completion:^{}];

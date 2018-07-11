@@ -12,8 +12,10 @@
 #import "Post.h"
 
 @interface HomeFeedViewController () <UITabBarDelegate, UITableViewDelegate, UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
 @property (strong, nonatomic) NSArray *posts;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -27,6 +29,10 @@
     
     self.feedTableView.rowHeight = UITableViewAutomaticDimension;
     self.feedTableView.estimatedRowHeight = 570;
+
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+    [self.feedTableView addSubview:self.refreshControl];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -48,6 +54,8 @@
             NSLog(@"%@", error.localizedDescription);
         }
     }];
+    
+    [self.refreshControl endRefreshing];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

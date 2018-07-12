@@ -23,6 +23,7 @@
 		F332F9FC20F42917000AC72D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332F9FB20F42917000AC72D /* LoginViewController.m */; };
 		F332F9FF20F42F32000AC72D /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F332F9FE20F42F32000AC72D /* HomeFeedViewController.m */; };
 		F3F9FC7C20F6B4C70084B7FB /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F9FC7B20F6B4C70084B7FB /* PostDetailViewController.m */; };
+		F3F9FC7F20F6DE950084B7FB /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F9FC7E20F6DE950084B7FB /* SignUpViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		F332F9FE20F42F32000AC72D /* HomeFeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeFeedViewController.m; sourceTree = "<group>"; };
 		F3F9FC7A20F6B4C70084B7FB /* PostDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
 		F3F9FC7B20F6B4C70084B7FB /* PostDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
+		F3F9FC7D20F6DE950084B7FB /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		F3F9FC7E20F6DE950084B7FB /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		F79F14E86770DA3AF6FEF369 /* Pods-InstagramUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramUITests/Pods-InstagramUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F88D2FA06E036B4B6F180A0A /* libPods-InstagramUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InstagramUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -211,6 +214,8 @@
 			children = (
 				F332F9FA20F42917000AC72D /* LoginViewController.h */,
 				F332F9FB20F42917000AC72D /* LoginViewController.m */,
+				F3F9FC7D20F6DE950084B7FB /* SignUpViewController.h */,
+				F3F9FC7E20F6DE950084B7FB /* SignUpViewController.m */,
 				F332F9FD20F42F32000AC72D /* HomeFeedViewController.h */,
 				F332F9FE20F42F32000AC72D /* HomeFeedViewController.m */,
 				F312C16B20F55D3A00F8D62C /* ComposePostViewController.h */,
@@ -446,6 +451,7 @@
 				F3F9FC7C20F6B4C70084B7FB /* PostDetailViewController.m in Sources */,
 				F332F9FF20F42F32000AC72D /* HomeFeedViewController.m in Sources */,
 				F312C16D20F55D3A00F8D62C /* ComposePostViewController.m in Sources */,
+				F3F9FC7F20F6DE950084B7FB /* SignUpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @end
 
@@ -20,7 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.loginButton.layer.cornerRadius = self.loginButton.frame.size.height * .1;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,33 +30,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)didTapSignUp:(id)sender {
-    [self registerUser];
-}
-
-- (void)registerUser {
-    // initialize user object
-    PFUser *newUser = [PFUser user];
-    
-    // set user properties
-    newUser.username = self.usernameField.text;
-    newUser.password = self.passwordField.text;
-    
-    if (![newUser.username isEqual:@""] && ![newUser.password isEqual:@""]) {
-        // call sign up function on the object
-        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-            if (error != nil) {
-                NSLog(@"Error: %@", error.localizedDescription);
-                [self callAlertWithTitle:@"Error" alertMessage:[NSString stringWithFormat:@"%@",error.localizedDescription]];
-            } else {
-                NSLog(@"User registered successfully");
-                [self performSegueWithIdentifier:@"loginSegue" sender:nil];
-            }
-        }];
-    } else {
-        [self callAlertWithTitle:@"Cannot Sign Up" alertMessage:@"Username and password fields cannot be blank"];
-        NSLog(@"Did not register user");
-    }
+- (IBAction)onTapAway:(id)sender {
+    [self.view endEditing:YES];
 }
 
 - (IBAction)didTapLogin:(id)sender {

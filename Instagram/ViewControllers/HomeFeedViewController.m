@@ -91,9 +91,11 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    PostTableViewCell *cell = sender;
-    PostDetailViewController *postDetailController = [segue destinationViewController];
-    postDetailController.post = cell.post;
+    if ([segue.identifier isEqualToString:@"detailSegue"]) {
+        PostTableViewCell *cell = sender;
+        PostDetailViewController *postDetailController = [segue destinationViewController];
+        postDetailController.post = cell.post;
+    }
 }
 
 @end

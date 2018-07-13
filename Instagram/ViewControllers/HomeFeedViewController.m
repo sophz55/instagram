@@ -11,6 +11,7 @@
 #import "PostTableViewCell.h"
 #import "PostDetailViewController.h"
 #import "Post.h"
+#import "InfiniteScrollActivityView.h"
 
 @interface HomeFeedViewController () <UITabBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) NSArray *posts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
+@property (strong, nonatomic) InfiniteScrollActivityView *loadingMoreView;
 
 @end
 
@@ -26,15 +28,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Set up table view
     self.feedTableView.dataSource = self;
     self.feedTableView.delegate = self;
-    
     self.feedTableView.rowHeight = UITableViewAutomaticDimension;
     self.feedTableView.estimatedRowHeight = 570;
 
+    // Set up pull to refresh
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.feedTableView addSubview:self.refreshControl];
+    
+    // Set up Infinite Scroll loading indicator
+    CGRect frame = CGRectMake(0, self.feedTableView.contentSize.height, self.feedTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    self.loadingMoreView.hidden = true;
+    [self.feedTableView addSubview:self.loadingMoreView];
+    
+    UIEdgeInsets insets = self.feedTableView.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self.feedTableView.contentInset = insets;
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -84,6 +97,12 @@
         // When the user has scrolled past the threshold, start requesting
         if (scrollView.contentOffset.y > scrollOffsetThreshold && self.feedTableView.isDragging) {
             self.isMoreDataLoading = YES;
+            
+            // Update position of self.loadingMoreView, and start loading indicator
+            CGRect frame = CGRectMake(0, self.feedTableView.contentSize.height, self.feedTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+            self.loadingMoreView.frame = frame;
+            [self.loadingMoreView startAnimating];
+            
             [self loadMoreData];
         }
     }
@@ -99,7 +118,9 @@
         if (posts != nil) {
             self.posts = posts;
             [self.feedTableView reloadData];
-            // Update flag
+            
+            [self.loadingMoreView stopAnimating];
+            
             self.isMoreDataLoading = NO;
         } else {
             NSLog(@"%@", error.localizedDescription);

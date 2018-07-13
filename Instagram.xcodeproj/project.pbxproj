@@ -26,6 +26,7 @@
 		F3F9FC7F20F6DE950084B7FB /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F9FC7E20F6DE950084B7FB /* SignUpViewController.m */; };
 		F3F9FC8220F804510084B7FB /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F9FC8120F804510084B7FB /* UserProfileViewController.m */; };
 		F3F9FC8520F82F610084B7FB /* PostCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F9FC8420F82F610084B7FB /* PostCollectionViewCell.m */; };
+		F3FF6F4E20F88C1100A0AFFA /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3FF6F4D20F88C1100A0AFFA /* InfiniteScrollActivityView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,8 @@
 		F3F9FC8120F804510084B7FB /* UserProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
 		F3F9FC8320F82F610084B7FB /* PostCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCollectionViewCell.h; sourceTree = "<group>"; };
 		F3F9FC8420F82F610084B7FB /* PostCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCollectionViewCell.m; sourceTree = "<group>"; };
+		F3FF6F4C20F88C1100A0AFFA /* InfiniteScrollActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollActivityView.h; sourceTree = "<group>"; };
+		F3FF6F4D20F88C1100A0AFFA /* InfiniteScrollActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollActivityView.m; sourceTree = "<group>"; };
 		F79F14E86770DA3AF6FEF369 /* Pods-InstagramUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramUITests/Pods-InstagramUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F88D2FA06E036B4B6F180A0A /* libPods-InstagramUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InstagramUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -213,6 +216,8 @@
 				F312C17620F57A9200F8D62C /* PostTableViewCell.m */,
 				F3F9FC8320F82F610084B7FB /* PostCollectionViewCell.h */,
 				F3F9FC8420F82F610084B7FB /* PostCollectionViewCell.m */,
+				F3FF6F4C20F88C1100A0AFFA /* InfiniteScrollActivityView.h */,
+				F3FF6F4D20F88C1100A0AFFA /* InfiniteScrollActivityView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -457,6 +462,7 @@
 				F3F9FC8520F82F610084B7FB /* PostCollectionViewCell.m in Sources */,
 				F30D058720F41BA7007DE0D3 /* main.m in Sources */,
 				F30D057920F41BA6007DE0D3 /* AppDelegate.m in Sources */,
+				F3FF6F4E20F88C1100A0AFFA /* InfiniteScrollActivityView.m in Sources */,
 				F312C17720F57A9200F8D62C /* PostTableViewCell.m in Sources */,
 				F332F9FC20F42917000AC72D /* LoginViewController.m in Sources */,
 				F3F9FC8220F804510084B7FB /* UserProfileViewController.m in Sources */,

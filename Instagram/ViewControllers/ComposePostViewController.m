@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
 @property (weak, nonatomic) IBOutlet UITextView *postCaptionTextView;
+@property (weak, nonatomic) IBOutlet UITextField *postLocationTextView;
 
 @end
 
@@ -83,7 +84,7 @@
 }
 
 - (IBAction)didTapShare:(id)sender {
-    [Post postUserImage:self.postImageView.image withCaption:self.postCaptionTextView.text withCompletion:^(BOOL succeeded, NSError *error) {
+    [Post postUserImage:self.postImageView.image withCaption:self.postCaptionTextView.text withLocation:self.postLocationTextView.text withCompletion:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"saved post");
             self.postImageView.image = NULL;
@@ -99,6 +100,10 @@
 - (IBAction)didTapCancel:(id)sender {
     self.postImageView.image = NULL;
     self.tabBarController.selectedIndex = 0;
+}
+
+- (IBAction)onTapAway:(id)sender {
+    [self.view endEditing:YES];
 }
 
 - (void)callAlertWithTitle:(NSString *)title alertMessage:(NSString *)message {

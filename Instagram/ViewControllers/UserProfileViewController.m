@@ -34,6 +34,15 @@
     [self configureViewWithUser:[PFUser currentUser]];
     
     [self configureCollectionView];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    self.postsCountLabel.text = [NSString stringWithFormat: @"%@", self.user[@"postsCount"]];
+    self.followersCountLabel.text = [NSString stringWithFormat: @"%@", self.user[@"followersCount"]];
+    self.followingCountLabel.text = [NSString stringWithFormat: @"%@", self.user[@"followingCount"]];
+
     [self fetchUserPosts];
 }
 
@@ -88,7 +97,6 @@
 - (void)fetchUserPosts {
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
-    [query includeKey:@"author"];
     [query whereKey:@"author" equalTo:self.user];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
@@ -121,7 +129,6 @@
     
     return cell;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

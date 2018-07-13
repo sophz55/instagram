@@ -12,11 +12,12 @@
 #import "PostDetailViewController.h"
 #import "Post.h"
 
-@interface HomeFeedViewController () <UITabBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface HomeFeedViewController () <UITabBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
 @property (strong, nonatomic) NSArray *posts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
 
 @end
 
@@ -72,6 +73,38 @@
     [cell configureCellWithPost:post];
     
     return cell;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (!self.isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.feedTableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.feedTableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if (scrollView.contentOffset.y > scrollOffsetThreshold && self.feedTableView.isDragging) {
+            self.isMoreDataLoading = YES;
+            [self loadMoreData];
+        }
+    }
+}
+
+- (void)loadMoreData{
+    NSLog(@"LOADING");
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            self.posts = posts;
+            [self.feedTableView reloadData];
+            // Update flag
+            self.isMoreDataLoading = NO;
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

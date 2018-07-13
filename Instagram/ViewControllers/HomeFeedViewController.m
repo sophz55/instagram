@@ -16,8 +16,9 @@
 @interface HomeFeedViewController () <UITabBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
-@property (strong, nonatomic) NSArray *posts;
+@property (strong, nonatomic) NSMutableArray *posts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (assign, nonatomic) int numPostsLoad; // query limit
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic) InfiniteScrollActivityView *loadingMoreView;
 
@@ -27,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.numPostsLoad = 20; // query limit
     
     // Set up table view
     self.feedTableView.dataSource = self;
@@ -60,11 +63,11 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"author"];
-    query.limit = 20;
+    query.limit = self.numPostsLoad;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
-            self.posts = posts;
+            self.posts = [[NSMutableArray alloc] initWithArray:posts];
             [self.feedTableView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
@@ -109,14 +112,16 @@
 }
 
 - (void)loadMoreData{
-    NSLog(@"LOADING");
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"author"];
+    query.limit = self.numPostsLoad;
+    query.skip = self.posts.count;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
-            self.posts = posts;
+            
+            [self.posts addObjectsFromArray:posts];
             [self.feedTableView reloadData];
             
             [self.loadingMoreView stopAnimating];

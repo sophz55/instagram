@@ -83,11 +83,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)clearPost {
+    self.postImageView.image = NULL;
+    self.postCaptionTextView.text = @"";
+    self.postLocationTextView.text = @"";
+}
+
 - (IBAction)didTapShare:(id)sender {
     [Post postUserImage:self.postImageView.image withCaption:self.postCaptionTextView.text withLocation:self.postLocationTextView.text withCompletion:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"saved post");
-            self.postImageView.image = NULL;
+            [self clearPost];
             self.tabBarController.selectedIndex = 0;
         }
         else {
@@ -98,7 +104,7 @@
 }
 
 - (IBAction)didTapCancel:(id)sender {
-    self.postImageView.image = NULL;
+    [self clearPost];
     self.tabBarController.selectedIndex = 0;
 }
 

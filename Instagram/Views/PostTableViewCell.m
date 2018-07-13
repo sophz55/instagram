@@ -33,7 +33,7 @@
 
     if (![post.caption isEqualToString:@""]) {
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[post.author.username stringByAppendingString: [@" " stringByAppendingString: post.caption]]];
-        [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13.0f weight:UIFontWeightBold] range:NSMakeRange(0, post.author.username.length)];
+        [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15.0f weight:UIFontWeightBold] range:NSMakeRange(0, post.author.username.length)];
         self.postCaptionLabel.attributedText = attributedString;
     } else {
         self.postCaptionLabel.text = @"";

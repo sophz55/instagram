@@ -770,15 +770,54 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uVN-19-Ndb">
+                                <rect key="frame" x="0.0" y="213" width="375" height="454"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RxN-st-c8B">
+                                    <size key="itemSize" width="167" height="140"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostCollectionViewCell" id="6Y3-cy-ILL" customClass="PostCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="167" height="140"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="167" height="140"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Ugx-nK-mZ4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="167" height="140"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Ugx-nK-mZ4" secondAttribute="trailing" id="1jf-FD-1pI"/>
+                                            <constraint firstItem="Ugx-nK-mZ4" firstAttribute="top" secondItem="6Y3-cy-ILL" secondAttribute="top" id="bgb-1t-JKf"/>
+                                            <constraint firstItem="Ugx-nK-mZ4" firstAttribute="leading" secondItem="6Y3-cy-ILL" secondAttribute="leading" id="rRu-Cf-KrE"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ugx-nK-mZ4" secondAttribute="bottom" id="uCK-Ge-oZt"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="postImageView" destination="Ugx-nK-mZ4" id="ExQ-XV-mcy"/>
+                                            <segue destination="6wZ-tq-yLI" kind="show" identifier="detailSegue" id="n6W-n0-XR4"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Am8-0K-CDA" firstAttribute="top" secondItem="Bmn-nT-gvD" secondAttribute="top" constant="10" id="186-Xb-t5u"/>
+                            <constraint firstItem="uVN-19-Ndb" firstAttribute="top" secondItem="Ro6-NE-mUq" secondAttribute="bottom" constant="10" id="364-Jv-UPu"/>
+                            <constraint firstAttribute="bottom" secondItem="uVN-19-Ndb" secondAttribute="bottom" id="5PU-uR-Lj2"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ugL-sJ-FFe" secondAttribute="trailing" constant="20" symbolic="YES" id="70s-vZ-Kox"/>
                             <constraint firstItem="Bmn-nT-gvD" firstAttribute="trailing" secondItem="il9-hh-Fmo" secondAttribute="trailing" constant="15" id="7nJ-pW-EYl"/>
+                            <constraint firstItem="uVN-19-Ndb" firstAttribute="leading" secondItem="Bmn-nT-gvD" secondAttribute="leading" id="GCZ-l8-CaM"/>
                             <constraint firstItem="Ro6-NE-mUq" firstAttribute="leading" secondItem="Am8-0K-CDA" secondAttribute="leading" id="GgI-oU-gnj"/>
                             <constraint firstItem="il9-hh-Fmo" firstAttribute="centerY" secondItem="Am8-0K-CDA" secondAttribute="centerY" id="H36-on-Ajn"/>
                             <constraint firstItem="ugL-sJ-FFe" firstAttribute="leading" secondItem="Am8-0K-CDA" secondAttribute="leading" id="JZf-HQ-2pO"/>
+                            <constraint firstItem="uVN-19-Ndb" firstAttribute="trailing" secondItem="Bmn-nT-gvD" secondAttribute="trailing" id="Udl-4G-tx9"/>
                             <constraint firstItem="ugL-sJ-FFe" firstAttribute="top" secondItem="Am8-0K-CDA" secondAttribute="bottom" constant="10" id="ZoM-rN-JwM"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ro6-NE-mUq" secondAttribute="trailing" constant="20" symbolic="YES" id="k8f-tH-swU"/>
                             <constraint firstItem="il9-hh-Fmo" firstAttribute="leading" secondItem="Am8-0K-CDA" secondAttribute="trailing" constant="15" id="ukR-Kk-ICo"/>
@@ -797,6 +836,7 @@
                         <outlet property="postsCountLabel" destination="WOQ-z8-Yxe" id="v7a-N7-9Me"/>
                         <outlet property="profileImageView" destination="Am8-0K-CDA" id="uSs-i2-0EC"/>
                         <outlet property="settingsView" destination="GLk-09-HkW" id="2Lu-8i-9aT"/>
+                        <outlet property="userPhotosCollectionView" destination="uVN-19-Ndb" id="vXG-0b-J6Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uky-X3-WCR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -876,7 +916,8 @@
         <image name="settings-icon" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ihw-dz-VfU"/>
+        <segue reference="cT9-Fq-yjm"/>
+        <segue reference="n6W-n0-XR4"/>
         <segue reference="JFm-Fk-Okz"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,8 +7,12 @@
 //
 
 #import "UserProfileViewController.h"
+#import "PostCollectionViewCell.h"
+#import "Post.h"
+#import "PostDetailViewController.h"
 
-@interface UserProfileViewController ()
+@interface UserProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *postsCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followersCountLabel;
@@ -17,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIView *settingsView;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *bio;
+@property (weak, nonatomic) IBOutlet UICollectionView *userPhotosCollectionView;
+@property (strong, nonatomic) NSArray *posts;
 
 @end
 
@@ -26,6 +32,9 @@
     [super viewDidLoad];
     
     [self configureViewWithUser:[PFUser currentUser]];
+    
+    [self configureCollectionView];
+    [self fetchUserPosts];
 }
 
 - (void)configureViewWithUser:(PFUser *)user {
@@ -53,22 +62,84 @@
     self.followingCountLabel.text = [NSString stringWithFormat: @"%@", user[@"followingCount"]];
     self.name.text = user[@"name"];
     self.bio.text = user[@"bio"];
-    
 }
+
+- (void)configureCollectionView {
+    self.userPhotosCollectionView.dataSource = self;
+    self.userPhotosCollectionView.delegate = self;
+    
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.userPhotosCollectionView.collectionViewLayout;
+    
+    CGFloat frameWidth = self.userPhotosCollectionView.frame.size.width;
+    
+    layout.minimumInteritemSpacing = 1;
+    layout.minimumLineSpacing = 1;
+    
+    CGFloat cellsPerLine;
+    if (frameWidth > 400) {
+        cellsPerLine = 4;
+    } else {
+        cellsPerLine = 3;
+    }
+    CGFloat itemWidth = (self.userPhotosCollectionView.frame.size.width - layout.minimumInteritemSpacing * (cellsPerLine + 1)) / cellsPerLine;
+    layout.itemSize = CGSizeMake(itemWidth, itemWidth);
+}
+
+- (void)fetchUserPosts {
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
+    [query whereKey:@"author" equalTo:self.user];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
+        if (posts != nil) {
+            self.posts = posts;
+            [self.userPhotosCollectionView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    return self.posts.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    PostCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PostCollectionViewCell" forIndexPath:indexPath];
+    
+    Post *post = self.posts[indexPath.item];
+    
+    if (post){
+        [post.image getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            cell.postImageView.image = [UIImage imageNamed:@"image_placeholder"];
+            cell.postImageView.image = [UIImage imageWithData:data];
+        }];
+    }
+    
+    return cell;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"detailSegue"]) {
+        PostCollectionViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.userPhotosCollectionView indexPathForCell:tappedCell];
+        Post *post = self.posts[indexPath.row];
+        PostDetailViewController *detailViewController = [segue destinationViewController];
+        [self.userPhotosCollectionView deselectItemAtIndexPath:indexPath animated:YES];
+        detailViewController.post = post;
+    }
 }
-*/
 
 @end

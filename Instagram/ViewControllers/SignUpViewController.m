@@ -48,6 +48,11 @@
     newUser.password = self.passwordField.text;
     newUser.email = self.emailField.text;
     newUser[@"name"] = self.nameField.text;
+    newUser[@"bio"] = @"";
+    newUser[@"profileImage"] = @0;
+    newUser[@"postsCount"] = @0;
+    newUser[@"followersCount"] = @0;
+    newUser[@"followingCount"] = @0;
     
     if (![newUser.email isEqual:@""] && ![newUser[@"name"] isEqual:@""] && ![newUser.username isEqual:@""] && ![newUser.password isEqual:@""]) {
         // call sign up function on the object

@@ -23,13 +23,18 @@
 
 - (void)configureCellWithPost:(Post *)post {
     self.post = post;
+//    self.userProfileImageView.image = post.author.image;
     self.userProfileImageView.layer.cornerRadius = self.userProfileImageView.frame.size.height/2;;
-//    self.usernameLabel;
+    self.usernameLabel.text = post.author.username;
 //    self.locationLabel;
     self.createdAtLabel.text = [post formatDateString];
     self.postImageView.file = post.image;
     [self.postImageView loadInBackground];
-    self.postCaptionLabel.text = post.caption;
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[post.author.username stringByAppendingString: [@" " stringByAppendingString: post.caption]]];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13.0f weight:UIFontWeightBold] range:NSMakeRange(0, post.author.username.length)];
+    self.postCaptionLabel.attributedText = attributedString;
+
     [self.likeButton setSelected:self.post.liked];
     self.likesCountLabel.text = [NSString stringWithFormat:@"%@ Likes",self.post.likeCount];
 }

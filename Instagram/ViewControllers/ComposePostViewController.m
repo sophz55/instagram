@@ -86,7 +86,6 @@
     [Post postUserImage:self.postImageView.image withCaption:self.postCaptionTextView.text withCompletion:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"saved post");
-            [self dismissViewControllerAnimated:YES completion:nil];
             self.postImageView.image = NULL;
             self.tabBarController.selectedIndex = 0;
         }
@@ -98,7 +97,7 @@
 }
 
 - (IBAction)didTapCancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    self.postImageView.image = NULL;
     self.tabBarController.selectedIndex = 0;
 }
 

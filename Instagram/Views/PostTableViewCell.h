@@ -19,8 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *likesCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postCaptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
-@property (strong, nonatomic) Post *post;
 @property (weak, nonatomic) IBOutlet UILabel *createdAtLabel;
+@property (strong, nonatomic) Post *post;
 
 
 - (void)configureCellWithPost:(Post *)post;

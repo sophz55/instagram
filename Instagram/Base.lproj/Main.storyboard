@@ -408,6 +408,7 @@
                                             <outlet property="postCaptionLabel" destination="TBz-F4-WIe" id="cHN-ek-mEu"/>
                                             <outlet property="postImageView" destination="KEn-Vk-tlq" id="ULM-j3-7mh"/>
                                             <outlet property="userProfileImageView" destination="MNE-xM-E1S" id="96e-QR-fto"/>
+                                            <outlet property="userStackView" destination="0FU-8S-A4e" id="Su4-Au-EiN"/>
                                             <outlet property="usernameLabel" destination="4Xf-3t-iDZ" id="jYZ-vz-cLP"/>
                                             <segue destination="6wZ-tq-yLI" kind="show" identifier="detailSegue" id="YGi-sS-DmF"/>
                                         </connections>
@@ -437,6 +438,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yPR-we-Atg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="d7P-Vr-QXm">
+                    <connections>
+                        <segue destination="CtY-JX-iQB" kind="show" identifier="userProfileSegue" id="cez-sH-u1p"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2520.8000000000002" y="-681.40929535232385"/>
         </scene>
@@ -1067,7 +1073,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4493.6000000000004" y="956.67166416791611"/>
+            <point key="canvasLocation" x="4297" y="958"/>
         </scene>
         <!--Feed-->
         <scene sceneID="Ul1-zj-qxp">
@@ -1145,7 +1151,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fso-Nz-ehY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3554.4000000000001" y="956.67166416791611"/>
+            <point key="canvasLocation" x="3406" y="957"/>
         </scene>
     </scenes>
     <resources>
@@ -1161,7 +1167,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cT9-Fq-yjm"/>
+        <segue reference="cez-sH-u1p"/>
         <segue reference="YGi-sS-DmF"/>
-        <segue reference="6d7-so-CYx"/>
+        <segue reference="JFm-Fk-Okz"/>
     </inferredMetricsTieBreakers>
 </document>

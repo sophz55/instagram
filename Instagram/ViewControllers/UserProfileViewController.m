@@ -38,7 +38,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    [self configureViewWithUser:[PFUser currentUser]];
+    [self configureViewWithUser];
     
     self.postsCountLabel.text = [NSString stringWithFormat: @"%@", self.user[@"postsCount"]];
     self.followersCountLabel.text = [NSString stringWithFormat: @"%@", self.user[@"followersCount"]];
@@ -47,8 +47,11 @@
     [self fetchUserPosts];
 }
 
-- (void)configureViewWithUser:(PFUser *)user {
-    self.user = user;
+- (void)configureViewWithUser {
+    
+    if (self.user == nil) {
+        self.user = PFUser.currentUser;
+    }
     
     // put username label in navigation bar
     UILabel *usernameLabel = [[UILabel alloc] init];
@@ -70,11 +73,11 @@
     self.settingsView.layer.cornerRadius = self.editProfileButton.frame.size.height * .1;
     
     // setting other quantities
-    self.postsCountLabel.text = [NSString stringWithFormat: @"%@", user[@"postsCount"]];
-    self.followersCountLabel.text = [NSString stringWithFormat: @"%@", user[@"followersCount"]];
-    self.followingCountLabel.text = [NSString stringWithFormat: @"%@", user[@"followingCount"]];
-    self.name.text = user[@"name"];
-    self.bio.text = user[@"bio"];
+    self.postsCountLabel.text = [NSString stringWithFormat: @"%@", self.user[@"postsCount"]];
+    self.followersCountLabel.text = [NSString stringWithFormat: @"%@", self.user[@"followersCount"]];
+    self.followingCountLabel.text = [NSString stringWithFormat: @"%@", self.user[@"followingCount"]];
+    self.name.text = self.user[@"name"];
+    self.bio.text = self.user[@"bio"];
 }
 
 - (void)configureCollectionView {

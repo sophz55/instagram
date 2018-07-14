@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.user = [PFUser currentUser];
     
     self.userProfileImageView.layer.cornerRadius = self.userProfileImageView.frame.size.height/2;

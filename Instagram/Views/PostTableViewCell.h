@@ -12,6 +12,7 @@
 #import "Post.h"
 
 @interface PostTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIStackView *userStackView;
 @property (weak, nonatomic) IBOutlet PFImageView *userProfileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;

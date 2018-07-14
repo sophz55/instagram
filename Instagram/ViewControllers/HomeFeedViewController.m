@@ -14,7 +14,7 @@
 #import "InfiniteScrollActivityView.h"
 #import "UserProfileViewController.h"
 
-@interface HomeFeedViewController () <UITabBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+@interface HomeFeedViewController () <UITabBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
 @property (strong, nonatomic) NSMutableArray *posts;
@@ -83,13 +83,26 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
     
     Post *post = (Post *)self.posts[indexPath.row];
     
     [cell configureCellWithPost:post];
     
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapUser:)];
+    [recognizer setDelegate:self];
+    [cell.userStackView addGestureRecognizer:recognizer];
+    cell.userStackView.userInteractionEnabled = YES;
+    
     return cell;
+}
+
+- (void)onTapUser:(UITapGestureRecognizer *)recognizer {
+    CGPoint location = [recognizer locationInView:self.feedTableView];
+    NSIndexPath *indexPath = [self.feedTableView indexPathForRowAtPoint:location];
+    PostTableViewCell *cell = [self.feedTableView cellForRowAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"userProfileSegue" sender:cell];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -155,6 +168,10 @@
         PostTableViewCell *cell = sender;
         PostDetailViewController *postDetailController = [segue destinationViewController];
         postDetailController.post = cell.post;
+    } else if ([segue.identifier isEqualToString:@"userProfileSegue"]) {
+        UserProfileViewController *profileViewController = [segue destinationViewController];
+        PostTableViewCell *cell = sender;
+        profileViewController.user = cell.post.author;
     }
 }
 

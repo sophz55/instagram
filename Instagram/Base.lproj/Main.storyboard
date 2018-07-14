@@ -1014,6 +1014,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="sUP-5B-CPR" firstAttribute="centerX" secondItem="KUa-vH-bVb" secondAttribute="centerX" id="41C-0Z-Ij4"/>
                             <constraint firstItem="J8A-ag-0R8" firstAttribute="width" secondItem="CnG-20-s0Q" secondAttribute="width" id="4xv-FU-aDu"/>
@@ -1035,6 +1036,9 @@
                             <constraint firstItem="UsB-zs-6MY" firstAttribute="width" secondItem="CnG-20-s0Q" secondAttribute="width" id="qD1-cU-E8w"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rBy-ma-6ao"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Vvc-Gw-Ntt" appends="YES" id="23d-Cs-opp"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Profile" id="4lO-27-BEg">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="tka-a0-MHM">
@@ -1057,6 +1061,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8aB-Ru-XKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Vvc-Gw-Ntt">
+                    <connections>
+                        <action selector="onTapAway:" destination="njn-GC-jIr" id="eXo-ei-Dlw"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4493.6000000000004" y="956.67166416791611"/>
         </scene>

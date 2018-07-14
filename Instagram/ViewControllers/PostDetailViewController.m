@@ -11,7 +11,7 @@
 #import <ParseUI/ParseUI.h>
 
 @interface PostDetailViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *userProfileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *postImageView;
@@ -36,10 +36,11 @@
 
 - (void)configureCellWithPost:(Post *)post {
     self.post = post;
-    //    self.userProfileImageView.image = post.author.image;
-    self.userProfileImageView.layer.cornerRadius = self.userProfileImageView.frame.size.height/2;;
+    self.userProfileImageView.layer.cornerRadius = self.userProfileImageView.frame.size.height/2;
+    self.userProfileImageView.file = post.author[@"profilePicture"];
+    [self.userProfileImageView loadInBackground];
     self.usernameLabel.text = post.author.username;
-    //    self.locationLabel;
+    self.locationLabel.text = post.location;
     self.createdAtLabel.text = [post formatDateString];
     self.postImageView.file = post.image;
     [self.postImageView loadInBackground];

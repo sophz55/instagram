@@ -12,6 +12,7 @@
 #import "PostDetailViewController.h"
 #import "Post.h"
 #import "InfiniteScrollActivityView.h"
+#import "UserProfileViewController.h"
 
 @interface HomeFeedViewController () <UITabBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 

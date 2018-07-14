@@ -49,7 +49,8 @@
     newUser.email = self.emailField.text;
     newUser[@"name"] = self.nameField.text;
     newUser[@"bio"] = @"";
-    newUser[@"profileImage"] = @0;
+    newUser[@"profilePicture"] = [self getPFFileFromImage:[UIImage imageNamed:@"image_placeholder"]];
+    
     newUser[@"postsCount"] = @0;
     newUser[@"followersCount"] = @0;
     newUser[@"followingCount"] = @0;
@@ -81,6 +82,22 @@
     [alert addAction:okAction];
     
     [self presentViewController:alert animated:YES completion:^{}];
+}
+
+- (PFFile *)getPFFileFromImage: (UIImage * _Nullable)image {
+    
+    // check if image is not nil
+    if (!image) {
+        return nil;
+    }
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    
+    return [PFFile fileWithName:@"image.png" data:imageData];
 }
 
 /*

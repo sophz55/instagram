@@ -10,10 +10,11 @@
 #import "PostCollectionViewCell.h"
 #import "Post.h"
 #import "PostDetailViewController.h"
+#import <ParseUI/ParseUI.h>
 
 @interface UserProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *postsCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followersCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followingCountLabel;
@@ -30,14 +31,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self configureViewWithUser:[PFUser currentUser]];
-    
+
     [self configureCollectionView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    [self configureViewWithUser:[PFUser currentUser]];
     
     self.postsCountLabel.text = [NSString stringWithFormat: @"%@", self.user[@"postsCount"]];
     self.followersCountLabel.text = [NSString stringWithFormat: @"%@", self.user[@"followersCount"]];
@@ -54,7 +55,10 @@
     usernameLabel.text = self.user.username;
     self.navigationItem.titleView = usernameLabel;
     
+    // loading user profile picture
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2;
+    self.profileImageView.file = self.user[@"profilePicture"];
+    [self.profileImageView loadInBackground];
     
     // adding button borders
     self.editProfileButton.layer.borderWidth = 0.5;
@@ -90,7 +94,7 @@
     } else {
         cellsPerLine = 3;
     }
-    CGFloat itemWidth = (self.userPhotosCollectionView.frame.size.width - layout.minimumInteritemSpacing * (cellsPerLine + 1)) / cellsPerLine;
+    CGFloat itemWidth = (self.userPhotosCollectionView.frame.size.width - layout.minimumInteritemSpacing * (cellsPerLine - 1)) / cellsPerLine;
     layout.itemSize = CGSizeMake(itemWidth, itemWidth);
 }
 

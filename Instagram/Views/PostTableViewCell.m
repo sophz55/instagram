@@ -7,6 +7,7 @@
 //
 
 #import "PostTableViewCell.h"
+#import <ParseUI/ParseUI.h>
 
 @implementation PostTableViewCell
 
@@ -23,8 +24,9 @@
 
 - (void)configureCellWithPost:(Post *)post {
     self.post = post;
-//    self.userProfileImageView.image = post.author.image;
-    self.userProfileImageView.layer.cornerRadius = self.userProfileImageView.frame.size.height/2;;
+    self.userProfileImageView.layer.cornerRadius = self.userProfileImageView.frame.size.height/2;
+    self.userProfileImageView.file = self.post.author[@"profilePicture"];
+    [self.userProfileImageView loadInBackground];
     self.usernameLabel.text = post.author.username;
     self.createdAtLabel.text = [post formatDateString];
     self.postImageView.file = post.image;
